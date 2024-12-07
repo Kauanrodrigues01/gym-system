@@ -110,18 +110,7 @@ pip install -r requirements.txt
 
 ### 4. Configurar as Variáveis de Ambiente
 
-Crie um arquivo .env na raiz do projeto e preencha as variáveis de ambiente necessárias para a configuração do banco de dados e do superusuário. Exemplo de como configurar o arquivo .env:
-
-```bash
-# Configuração do email, USE ESTE MESMO, pois é apenas um email de teste
-EMAIL_HOST_PASSWORD = 'yzuy uyju jxpo faxf'
-
-# Configurações do superusuário (serão usadas para criar o superusuário automaticamente após a migração)
-DJANGO_SUPERUSER_CPF = 'seu cpf'
-DJANGO_SUPERUSER_EMAIL = 'seu email'
-DJANGO_SUPERUSER_PASSWORD = 'sua senha'
-
-```
+Crie um arquivo .env na raiz do projeto e preencha as variáveis de ambiente necessárias para a configuração do banco de dados e do superusuário. Tem um exemplo de .env no diretório chamado '.env.example':
 
 ### 5. Aplicar as Migrações
 
