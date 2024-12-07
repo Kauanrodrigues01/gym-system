@@ -1,0 +1,992 @@
+@import url('/static/global/css/variables.css');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: var(--font-primary);
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Contêiner principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-gutter-large);
+}
+
+.center{
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Estilos do painel */
+.admin-panel {
+  width: 100%;
+  max-width: 1200px;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-gutter-small);
+  transition: all 0.3s ease;
+}
+
+.admin-panel h1 {
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 2rem;
+}
+
+/* Cartões de informações */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: var(--color-primary-light);
+  border-radius: 8px;
+  padding: var(--spacing-gutter-small);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card h3 {
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+}
+
+.card .count {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.card-link:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Atividades recentes */
+.recent-activities {
+  margin-top: 3rem;
+  background-color: var(--color-gray-0);
+  padding: var(--spacing-gutter-small);
+  border-radius: 8px;
+}
+
+.recent-activities h2 {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+}
+
+.recent-activities ul {
+  list-style-type: none;
+}
+
+.recent-activities li {
+  background-color: var(--color-white);
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  color: var(--color-gray-7);
+}
+
+.recent-activities li:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  transition: all 0.3s ease;
+}
+
+
+/* Painel com informações dos alunos */
+.students-panel {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: var(--spacing-gutter-small);
+  background-color: var(--color-white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.title-page-alunos {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 2rem;
+}
+
+/* Botão de adicionar aluno */
+.add-student-button {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Estilos gerais para os botões */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  border: 2px solid transparent;  /* Borda base transparente */
+  text-decoration: none;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.btn-add{
+  background-color: var(--color-add);
+  color: var(--color-white); 
+  border-color: var(--color-add);
+}
+
+.btn-add:hover {
+  background-color: var(--color-add-hover);
+  border-color: var(--color-add-hover);
+}
+
+/* Botão Primário */
+.btn-primary {
+  background-color: var(--color-primary);  
+  color: var(--color-white);  
+  border-color: var(--color-primary);  
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);  
+  border-color: var(--color-primary-hover);  
+}
+
+/* Botão Secundário */
+.btn-secondary {
+  background-color: var(--color-edit);  
+  color: var(--color-white); 
+  border-color: var(--color-edit); 
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-edit-hover); 
+  border-color: var(--color-edit-hover);
+}
+
+/* Botão de Perigo */
+.btn-danger {
+  background-color: var(--color-danger); 
+  color: var(--color-white);  
+  border-color: var(--color-danger);
+}
+
+.btn-danger:hover {
+  background-color: var(--color-danger-hover);  /* Cor de fundo no hover */
+  border-color: var(--color-danger-hover);  /* Ajuste da borda para o hover */
+}
+
+/* Botão de Cancelamento */
+.btn-cancel {
+  background-color: var(--color-gray-1);  /* Cor de fundo */
+  color: var(--color-dark-text);  /* Cor do texto */
+  border: 2px solid var(--color-gray-3);  /* Borda visível cinza */
+}
+
+.btn-cancel:hover {
+  background-color: var(--color-gray-2);  /* Cor de fundo no hover */
+  border-color: var(--color-gray-4);  /* Ajuste da borda para o hover */
+}
+
+
+/* Título centralizado */
+.students-list{
+  width: 100%;
+  max-width: 1200px; /* ou outro valor adequado */
+  margin: 0 auto;
+}
+
+.students-list h2.center {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 2rem;
+}
+
+.form-search-member {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.input-search {
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  padding-right: 3rem; /* Aumenta o espaço à direita para o ícone */
+  border: 1px solid #ccc;
+  font-size: 1.5rem;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.input-search:focus {
+  border-color: #007bff; /* Cor do foco */
+  outline: none; /* Remove o contorno padrão */
+}
+
+.button-search {
+  all: unset;
+  display: inline-block;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  transition: transform 0.3s ease;
+}
+
+.button-search:hover {
+  transform: translateY(-50%) scale(1.1); /* Animação de aumento ao passar o mouse */
+}
+
+.button-search i {
+  font-size: 1.5rem;
+  color: #007bff;
+}
+
+.button-search:focus i {
+  color: #0056b3;
+}
+
+.form-search-member .input-search::placeholder {
+  color: #aaa; /* Cor do texto do placeholder */
+}
+
+/* Estilização dos filtros */
+.filter-toggle{
+  margin-bottom: 2rem;
+  margin-left: 5rem;
+}
+
+.filter-section {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--color-gray-0);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  overflow: hidden;
+}
+
+/* Quando visível */
+.filter-section.visible {
+  max-height: 500px;
+  opacity: 1;
+  margin-bottom: 3rem;
+}
+
+/* Botão de alternar filtros */
+.btn-filter-toggle {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.btn-filter-toggle i {
+  margin-right: 0.5rem;
+}
+
+.btn-filter-toggle:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo dos filtros */
+.filter-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.form-filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item {
+  margin-bottom: 1rem;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+.btn-filter {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  height: 31px;
+}
+
+.btn-filter i {
+  margin-right: 0.5rem;
+}
+
+.btn-filter:hover {
+  background-color: #0056b3;
+}
+
+
+/* Grade responsiva */
+.students-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+  gap: 1.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Cartão de aluno */
+.student-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-2);
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Cabeçalho do cartão */
+.student-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.student-header h3 {
+  font-size: 1.5rem;
+  font-family: var(--font-);
+  color: var(--color-primary-dark);
+}
+
+.student-header .student-id {
+  font-size: 0.9rem;
+  color: var(--color-gray-3);
+  font-weight: bold;
+}
+
+/* Informações do aluno */
+.student-info p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: var(--color-dark-text);
+}
+
+.student-info strong {
+  font-weight: bold;
+}
+
+/* Botões de ações */
+.student-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.student-actions .btn {
+  flex: 1;
+  margin: 0 0.5rem;
+}
+
+/* Status */
+.status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.status.active {
+  background-color: var(--color-success);
+  color: #fff;
+}
+
+.status.inactive {
+  background-color: var(--color-danger);
+  color: #fff;
+}
+
+/* Container principal */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Contêiner da paginação */
+.pagination-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Link de página */
+.page-link {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 0 4px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Cor do link */
+.page-item {
+  font-size: 14px;
+}
+
+/* Página atual - destaque */
+.page-current {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  border-color: #007bff;
+}
+
+/* Hover para links */
+.page-link:hover {
+  background-color: #f1f1f1;
+  color: #007bff;
+  border-color: #007bff;
+}
+
+/* Páginas de "..." */
+.page-item:not(.page-current) {
+  color: #6c757d;
+  cursor: default;
+}
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background-color: var(--color-white);
+  padding: var(--spacing-gutter-small);
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.modal-container h3 {
+  margin-bottom: 2rem;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Form edit member */
+.container-form-edit-member {
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: var(--color-white);
+  padding: var(--spacing-gutter-small);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Título do formulário */
+.container-form-edit-member h1 {
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+
+/* Estilo do formulário de pagamento */
+.container-form-payment {
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: var(--color-white);
+  padding: var(--spacing-gutter-small);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.container-form-payment h1 {
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+
+/* Estlização global formulario */
+.form h3 {
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 1.5rem;
+}
+
+.form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form input,
+.form select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--color-gray-2);
+  border-radius: 5px;
+}
+
+/* Erros do formulário */
+.error-list {
+  color: var(--color-error);
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.error-list li {
+  margin: 0;
+}
+
+/* Finance page */
+/* Estilos do painel de finanças */
+.finance-panel {
+  width: 100%;
+  max-width: 1200px;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-gutter-small);
+  transition: all 0.3s ease;
+}
+
+.finance-panel h1 {
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 2rem;
+}
+
+/* Cartões de Resumo */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: var(--color-primary-light);
+  border-radius: 8px;
+  padding: var(--spacing-gutter-small);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card h3 {
+  font-family: var(--font-family);
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+}
+
+.card .count {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-primary-dark);
+  margin-bottom: 1rem;
+}
+
+.card-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.card-link:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Estilos para as seções "Lucro por Mês" e "Transações Recentes" */
+.finance-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.monthly-profit,
+.transaction-list {
+  background-color: var(--color-gray-0);
+  padding: var(--spacing-gutter-small);
+  border-radius: 8px;
+}
+
+/* Títulos */
+.monthly-profit h2,
+.transaction-list h2 {
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 1.5rem;
+}
+
+/* Listagem de Lucro por Mês */
+.monthly-profit ul,
+.transaction-list ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.monthly-profit li,
+.transaction-list li {
+  background-color: var(--color-white);
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  color: var(--color-gray-7);
+}
+
+.monthly-profit li:hover,
+.transaction-list li:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  transition: all 0.3s ease;
+}
+
+.monthly-profit li span,
+.transaction-list li span {
+  font-weight: bold;
+  color: var(--color-primary-dark);
+}
+
+/* Estilização do grafico */
+.graph-container {
+  margin-top: 30px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.graph-container h3 {
+  text-align: center;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: var(--color-primary-dark);
+}
+
+.graph-container .plotly-graph {
+  width: 100%;
+  height: 700px;  /* Ajuste a altura conforme necessário */
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.graph-container .plotly-graph iframe {
+  width: 100%;
+  height: 100%;
+}
+
+
+.download-report {
+  text-align: center;
+  padding: var(--spacing-gutter-medium);
+  background-color: var(--color-gray-0);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+/* Estilo do título */
+.download-report h2 {
+  font-size: 24px;
+  font-family: var(--font-primary);
+  color: var(--color-primary-dark);
+  margin-bottom: var(--spacing-gutter-medium);
+}
+
+.download-report-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Estilo dos botões de download */
+.download-report .btn-download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 285px;
+  padding: 12px 24px;
+  margin: 10px 5px;
+  font-size: 16px;
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s;
+  font-family: var(--font-primary);
+}
+
+/* Estilização download relatório */
+.download-report .btn-download:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.download-report .btn-download i {
+  margin-right: 8px;
+}
+
+/* Efeito ao pressionar o botão */
+.download-report .btn-download:active {
+  background-color: var(--color-primary-dark);
+}
+
+/* Container Principal */
+.download-report-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--color-gray-0);
+  border-radius: 0.5rem;
+}
+
+/* Título */
+.download-report-title {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-family: var(--font-headings);
+  color: var(--color-primary-dark);
+  margin-top: 3rem;
+}
+
+/* Formulário */
+.download-report-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Grupo de Campos */
+.download-report-group {
+  margin-bottom: 1rem;
+}
+
+.download-report-label {
+  font-family: var(--font-primary);
+  color: var(--color-dark-text);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.download-report-input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-gray-3);
+  font-family: var(--font-primary);
+  color: var(--color-dark-text);
+  background-color: var(--color-white);
+}
+
+/* Botões */
+.download-report-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.download-report-button {
+  color: var(--color-white);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  height: 38px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.3rem;
+  width: 100%;
+  max-width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.download-report-button i {
+  margin-right: 0.5rem;
+}
+
+.download-report-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.download-report-submit {
+  background-color: var(--color-success);
+}
+
+.download-report-submit:hover {
+  background-color: var(--color-success-hover);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-panel {
+    padding: 1rem;
+  }
+
+  .students-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .finance-sections {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-toggle{
+    margin-left: 0.5rem;
+  }
+
+  .pagination-content {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-search-member {
+    max-width: 100%;
+  }
+
+  .input-search {
+    padding-right: 2.5rem;
+  }
+
+  .container{
+    padding: var(--spacing-gutter-small);
+  }
+
+  .finance-panel{
+    padding: var(--spacing-gutter-xsmall);
+  }
+}
+
+@media (max-width: 416px) {
+  .download-report .btn-download {
+    width: 220px;
+    padding: 6px 12px;
+    font-size: 1.3rem;
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+    font-family: var(--font-primary);
+  }
+}

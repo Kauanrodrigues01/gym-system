@@ -1,0 +1,37 @@
+{% extends 'global/pages/base_painel_adm.html' %}
+
+{% load static %}
+
+{% block additional_tags %}
+<script src="{% static 'admin_panel/js/formatter-phone.js' %}" defer></script>
+{% endblock additional_tags %}
+
+{% block title %}Editar Aluno{% endblock %}
+
+{% block content %}
+<main class="container-form-edit-member">
+    <h1>Editar Aluno: {{ member.full_name }}</h1>
+    <form method="POST" action="{% url 'admin_panel:edit_member' member.id %}" class="form">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field }}
+                
+                <!-- Exibe os erros de validação do campo -->
+                {% if field.errors %}
+                    <ul class="error-list">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+        <a href="{% url 'admin_panel:members' %}" class="btn btn-danger">Cancelar</a>
+    </form>
+</main>
+{% endblock %}

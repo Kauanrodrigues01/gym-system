@@ -1,0 +1,107 @@
+{% extends 'global/pages/base_painel_adm.html' %}
+
+{% load static %}
+
+{% block additional_tags %}
+<script src="{% static 'admin_panel/js/filter_member_toogle.js' %}" defer></script>
+<script src="{% static 'admin_panel/js/formatter-phone.js' %}" defer></script>
+{% endblock additional_tags %}
+
+{% block title %}Página de Alunos{% endblock title %}
+
+{% block content %}
+<main class="students-panel container">
+    <h1 class="title-page-alunos">Gestão de Alunos</h1>
+    
+    <!-- Botão para adicionar novo aluno -->
+    <div class="add-student-button">
+        <button class="btn btn-add" id="add-student-btn">Adicionar Aluno</button>
+    </div>
+
+    <section class="students-list">
+        <h2 class="center">Alunos Cadastrados: </h2>
+
+        <form action="{% url 'admin_panel:members' %}" method="GET" class="form-search-member">
+            <input type="search" name="q" class="input-search" value="{{ search_query }}">
+            <button class="button-search" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+
+        <div class="filter-toggle">
+            <button class="btn btn-filter-toggle">
+                <i class="fas fa-filter"></i> Filtros
+            </button>
+        </div>
+    
+        <div class="filter-section" id="filter-section">
+            <h3>Filtros</h3>
+            <form action="{% url 'admin_panel:members' %}" method="GET" class="form-filters">
+                <div class="filter-item">
+                    <label for="status-filter">Status:</label>
+                    <select name="status" id="status-filter" class="filter-select">
+                        <option value="">Todos</option>
+                        <option value="active" {% if request.GET.status == 'active' %}selected{% endif %}>Ativo</option>
+                        <option value="inactive" {% if request.GET.status == 'pendente' %}selected{% endif %}>Pendente</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="date-filter">Data do último pagamento:</label>
+                    <input type="date" name="last_payment" id="date-filter" class="filter-select" value="{{ request.GET.last_payment }}">
+                </div>
+                <div class="filter-item">
+                    <button class="btn btn-filter" type="submit">
+                        <i class="fas fa-filter"></i> Aplicar Filtros
+                    </button>
+                    <a href="{% url 'admin_panel:members' %}" class="btn btn-danger">
+                        Desativar filtros
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="students-cards">
+            {% for member in members %}
+                {% include "admin_panel/partials/member.html" %}
+            {% empty %}
+                <p class="center">Nenhum aluno encontrado.</p>
+            {% endfor %}
+        </div>
+
+        {% include 'admin_panel/partials/pagination.html' %}
+
+    </section>
+    
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-container">
+            <h3>Adicionar Aluno</h3>
+            <form id="add-student-form" method="POST" action="{% url 'admin_panel:add_member' %}" class="form">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div class="form-group">
+                        <!-- Renderiza o label do campo -->
+                        {{ field.label_tag }}
+                        <!-- Renderiza o input do campo -->
+                        {{ field }}
+                        <!-- Exibe erros do campo -->
+                        {% if field.errors %}
+                            <ul class="error-list">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+    
+                <div class="modal-buttons">
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <button type="button" class="btn btn-cancel" id="modal-close-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock content %}

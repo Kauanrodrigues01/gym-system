@@ -1,0 +1,26 @@
+<div class="student-card">
+    <div class="student-header">
+        <h3>{{ member.full_name }}</h3>
+        <p class="student-id">#{{ member.id }}</p>
+    </div>
+    <div class="student-info">
+        <p><strong>Email:</strong> {{ member.email }}</p>
+        <p><strong>Telefone:</strong> {{ member.phone }}</p>
+        <p><strong>Status:</strong> <span class="status {% if member.is_active %}active{% else %}inactive{% endif %}">
+            {% if member.is_active %}
+                Ativo
+            {% else %}
+                Pendente
+            {% endif %}
+        </span></p>
+        <p><strong>Data do pagamento:</strong> {{ member.last_payment_date }}</p>
+    </div>
+    <div class="student-actions">
+        <a href="{% url 'admin_panel:edit_member_view' member.id %}" class="btn btn-secondary">Editar</a>
+        <a href="{% url 'admin_panel:delete_member' member.id %}" class="btn btn-danger">Excluir</a>
+
+        {% if member.is_active is False %}
+        <a href="{% url 'admin_panel:add_payment_view' member.id %}" class="btn btn-add">Registrar pagamento</a>
+        {% endif %}
+    </div>
+</div>

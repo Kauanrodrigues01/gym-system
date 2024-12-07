@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Geral da Academia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .summary {
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .summary p {
+            margin: 5px 0;
+        }
+        .payment-details {
+            margin-top: 30px;
+        }
+        .payment-details h3 {
+            text-align: left;
+        }
+        .payment-item {
+            margin-bottom: 10px;
+        }
+        .payment-item p {
+            margin: 2px 0;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 10px 0;
+        }
+        .obs{
+            font-size: 1rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Relatório Geral da Academia</h1>
+    <h2>Data de Geração: {{ date }}</h2>
+
+    <div class="summary">
+        <h3>Resumo de Alunos</h3>
+        <p class="obs"><em>OBS: Este relatório apresenta o número de alunos ativos e pendentes no momento em que o relatório foi gerado.</em></p>
+        <p><strong>Alunos Ativos:</strong> {{ active_members }}</p>
+        <p><strong>Alunos Pendentes:</strong> {{ inactive_members }}</p>
+    </div>
+
+    <div class="summary">
+        <h3>Resumo da Receita</h3>
+        <p class="obs"><em>OBS: A receita total mostrada inclui todos os pagamentos realizados na academia até o momento.</em></p>
+        <p><strong>Receita Total:</strong> R${{ total_revenue|floatformat:2 }}</p>
+    </div>
+
+    <div class="payment-details">
+        <h3>Detalhes dos Pagamentos</h3>
+        <p class="obs"><em>OBS: Abaixo estão listados todos os pagamentos efetuados na academia até a data do relatório.</em></p>
+        {% for payment in payments %}
+        <div class="payment-item">
+            <p><strong>Aluno:</strong> {{ payment.member.full_name }}</p>
+            <p><strong>Data do Pagamento:</strong> {{ payment.payment_date }}</p>
+            <p><strong>Valor:</strong> R${{ payment.amount|floatformat:2 }}</p>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+</body>
+</html>

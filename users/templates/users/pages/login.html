@@ -1,0 +1,46 @@
+{% extends 'global/pages/base_page_form.html' %}
+
+{% load static %}
+
+{% block additional_tags %}
+<script src="{% static 'users/js/formatter-cpf.js' %}" defer></script>
+{% endblock additional_tags %}
+
+{% block title %}Login{% endblock title %}
+    
+{% block content %} 
+<main class="container-form">
+    <div class="header">
+        <h2 class="login-title">Login</h2>
+        <p class="login-description">Faça login para poder consultar os dados administrativos</p>
+    </div>
+    <div class="form-container">
+        <form action="{% url 'users:login_submit' %}" method="POST" class="login-form">
+            {% csrf_token %}
+
+            <div class="form-content">
+                {% for field in form %}
+                    <div class="form-group">
+                    {{field}}
+        
+                    {% if field.help_text %}
+                        <p class="help-text">{{ field.help_text }}</p>
+                    {% endif %}
+        
+                    {{ field.errors }}
+                    </div>
+                {% endfor %}
+            </div>
+        
+            <div class="form-actions">
+                <div class="container-reset-password">
+                    <a href="{% url 'users:password_reset' %}">Esqueceu a senha?</a>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Entrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>     
+{% endblock content %}

@@ -1,0 +1,26 @@
+-r requirements.txt
+
+arabic-reshaper==3.0.0
+chardet==5.2.0
+charset-normalizer==3.4.0
+click==8.1.7
+click-didyoumean==0.3.1
+click-plugins==1.1.1
+click-repl==0.3.0
+colorama==0.4.6
+coverage==7.6.4
+cron-descriptor==1.4.5
+django-debug-toolbar==4.4.6
+Faker==30.8.2
+iniconfig==2.0.0
+lxml==5.3.0
+packaging==24.2
+parameterized==0.9.0
+pluggy==1.5.0
+prompt_toolkit==3.0.48
+pytest==8.3.3
+pytest-django==4.9.0
+python-bidi==0.6.3
+python-crontab==3.2.0
+python-dateutil==2.9.0.post0
+PyPDF2==3.0.1

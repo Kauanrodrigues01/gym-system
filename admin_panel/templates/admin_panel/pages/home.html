@@ -1,0 +1,47 @@
+{% extends 'global/pages/base_painel_adm.html' %}
+
+{% block title %}Painel do administrador{% endblock title %}
+
+{% block content %}
+<main class="container center">
+    <div class="admin-panel">
+        <h1>Painel Administrativo</h1>
+        <div class="dashboard-cards">
+            <div class="card">
+                <h3>Alunos Ativos</h3>
+                <p class="count">{{ count_members_actives }}</p>
+                {% comment %} <a href="#" class="card-link">Ver detalhes</a> {% endcomment %}
+            </div>
+            <div class="card">
+                <h3>Alunos Pendentes</h3>
+                <p class="count">{{ count_members_inactives }}</p>
+                {% comment %} <a href="#" class="card-link">Ver detalhes</a> {% endcomment %}
+            </div>
+            <div class="card">
+                <h3>Receita do Mês</h3>
+                <p class="count">R$ {{ profit_total_month }}</p>
+                {% comment %} <a href="#" class="card-link">Ver detalhes</a> {% endcomment %}
+            </div>
+            <div class="card">
+                <h3>Novos Alunos</h3>
+                <p class="count">{{ count_new_members_in_month }}</p>
+                {% comment %} <a href="#" class="card-link">Ver detalhes</a> {% endcomment %}
+            </div>
+        </div>
+        <div class="recent-activities">
+            <h2>Atividades Recentes</h2>
+            <ul>
+                {% if recent_activities %}
+                    {% for active in recent_activities %}
+                    <li>{{ active.description }} | {{ active.created_at|date:"d/m/y H:i" }}</li>
+                    {% endfor %}
+                {% else %}
+                    <li>Não há atividades recentes.</li>
+                {% endif %}
+                
+            </ul>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

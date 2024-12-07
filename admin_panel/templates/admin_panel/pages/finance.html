@@ -1,0 +1,88 @@
+{% extends 'global/pages/base_painel_adm.html' %}
+
+{% block title %}Finanças - Painel Administrativo{% endblock title %}
+
+{% block content %}
+<main class="container center">
+    <div class="finance-panel">
+        <h1>Finanças</h1>
+        
+        <!-- Cartões de Resumo -->
+        <div class="dashboard-cards">
+            <div class="card">
+                <h3>Lucro Total do Ano</h3>
+                <p class="count">R$ {{ current_year_profit }}</p>
+                {% comment %} <a href="#" class="card-link">Ver detalhes</a> {% endcomment %}
+            </div>
+            <div class="card">
+                <h3>Lucro do Mês atual</h3>
+                <p class="count">R$ {{ current_month_profit }}</p>
+                {% comment %} <a href="#" class="card-link">Ver detalhes</a> {% endcomment %}
+            </div>
+            <div class="card">
+                <h3>Mês com Maior Lucro</h3>
+                <p class="count">{{ month_with_highest_profit }}</p>
+                {% comment %} <a href="#" class="card-link">Ver detalhes</a> {% endcomment %}
+            </div>
+        </div>
+
+        <!-- Lucro por Mês e Transações Recentes -->
+        <div class="finance-sections">
+            <!-- Lucro por Mês -->
+            <div class="monthly-profit">
+                <h2>Lucro por Mês</h2>
+                <ul>
+                    {% for month, profit in months_profit.items %}
+                        <li>{{ month }} | R$ {{ profit }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="transaction-list">
+                <h2>Pagamentos Recentes</h2>
+                <ul>
+                    {% for payment in recents_payments %}
+                        <li> {{ payment }} </li>
+                    {% endfor %}
+                </ul>
+            </div>        
+        </div>
+
+        <div class="graph-container">
+            <h3>Gráfico de Lucros Mensais</h3>
+            <!-- Renderiza o gráfico -->
+            {{ graph_html|safe }}
+        </div>
+        
+
+        <div class="download-report">
+            <h2>Download de Relatórios</h2>           
+            <div class="download-report-container">
+                <a href="{% url 'admin_panel:generate_pdf_general_report' %}" class="btn btn-download">
+                    <i class="fas fa-download"></i> Relatório geral
+                </a>
+                <a href="{% url 'admin_panel:generate_pdf_report_of_current_day' %}" class="btn btn-download">
+                    <i class="fas fa-download"></i> Relatório do dia atual
+                </a>
+            </div>
+
+            <h2 class="download-report-title">Download de Relatórios com data especificada</h2>
+            <div class="download-report-form-container">
+                <form action="{% url 'admin_panel:members' %}" method="GET" class="download-report-form">
+                    <div class="download-report-group">
+                        <label for="date-filter" class="download-report-label">Data do Relatório:</label>
+                        <input type="date" name="date" id="date-filter" class="download-report-input" value="{{ request.GET.date }}">
+                    </div>
+                    <div class="download-report-actions">
+                        <button class="download-report-button download-report-submit" type="submit">
+                            <i class="fas fa-download"></i> Gerar Relatório
+                        </button>
+                    </div>
+                </form>
+            </div> 
+        </div>        
+            
+    </div>
+</main>
+
+{% endblock content %}

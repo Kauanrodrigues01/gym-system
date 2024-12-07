@@ -1,0 +1,13 @@
+{% include 'global/partials/head_page_adm.html' %}
+    {% block additional_tags %}{% endblock additional_tags %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+    {% include 'global/partials/menu.html' %}
+    {% include 'global/partials/messages.html' %}
+
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

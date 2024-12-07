@@ -1,0 +1,41 @@
+{% load static %}
+<button class="button-show-menu button-show-menu-visible">
+  <i class="fas fa-bars"></i>
+  <span class="hidden-text">Show menu</span>
+</button>
+
+<div class="menu-container menu-hidden">
+  <button class="button-close-menu button-close-menu-visible">
+    <i class="fas fa-times-circle"></i>
+    <span class="hidden-text">Close menu</span>
+  </button>
+
+  <div class="menu-content">
+    <nav class="menu-nav">
+
+      {% if user.is_authenticated %}
+        <span class="menu-link-container">
+          <img src="{% static 'global/img/home-icon.png' %}" alt="Icone da Home">
+          <a href="{% url 'admin_panel:home' %}">PAINEL DO ADMINISTRADOR</a>
+        </span>
+        <span class="menu-link-container">
+          <img src="{% static 'global/img/alunos-icon.png' %}" alt="Icone de Alunos">
+          <a href="{% url 'admin_panel:members' %}">ALUNOS</a>
+        </span>
+        <span class="menu-link-container">
+          <img src="{% static 'global/img/financeiro-icon.png' %}" alt="Icone de Financeiro">
+          <a href="{% url 'admin_panel:finance' %}">FINANCEIRO</a>
+        </span>
+        <span class="menu-link-container">
+          <img src="{% static 'global/img/logout-icon.png' %}" alt="Icone de Logout">
+          <a class="authors-logout-link" href="{% url 'users:logout_view' %}">SAIR</a>
+        </span>
+      {% else %}
+        <span class="menu-link-container">
+          <img src="{% static 'global/img/login-icon.png' %}" alt="Icone de Logout">
+          <a href="{% url 'users:login_view' %}">LOGIN</a>
+        </span>
+      {% endif %}
+    </nav>
+  </div>
+</div>
