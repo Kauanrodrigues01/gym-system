@@ -1,89 +1,77 @@
-# **Aplicação de Gerenciamento de Alunos de uma academia**
+# 🏋️ Sistema de Gestão de Academia
 
-A aplicação foi desenvolvida para atender às necessidades de administração de academias, proporcionando controle eficiente sobre os dados dos alunos, pagamentos e relatórios. Sua arquitetura modular e escalável facilita a adição de novas funcionalidades e adaptações.
+## Índice
+- [Sobre](#sobre)
+- [Funcionalidades Principais](#funcionalidades-principais)
+- [Integrações Avançadas](#integrações-avançadas)
+- [Relatórios e Dados](#relatórios-e-dados)
+- [Benefícios](#benefícios)
+- [Instalação](#instalação)
 
----
+## <a id="sobre">Sobre o Projeto</a>
 
-## **Funcionalidades Principais**
+Sistema de gestão de academia com automação inteligente, focado em eficiência administrativa e experiência do aluno.
 
-### **1. CRUD de Alunos**
-- Criação, visualização, atualização e exclusão de alunos.
-- Dados detalhados como informações de contato e status de pagamento.
+## <a id="funcionalidades-principais">Funcionalidades Principais</a>
 
-### **2. Automatização de Tarefas**
-- **Celery** é utilizado para:
-  - Verificação diária de pagamentos atrasados (alunos com mais de um mês sem pagar).
-  - Geração de relatórios diários ao final do dia.
-- **Redis** atua como broker para filas de tarefas, garantindo alta performance.
+- CRUD completo de alunos
+- Automatização de tarefas com Celery
+- Paginação e filtros otimizados
 
-### **3. Gerenciamento Financeiro**
-- Geração de gráficos financeiros com **Pandas** e **Plotly**, detalhando:
-  - Dinheiro recebido por mês.
-  - Outras métricas importantes para a academia.
+## Tecnologias
 
-### **4. Relatórios em PDF**
-- Utilização de **xhtml2pdf** e **reportlab** para criar relatórios estilizados.
-- Relatórios gerais e diários podem ser baixados pelo administrador.
+- Django
+- Django Rest Framework
+- Celery
+- Redis
+- Pandas
+- Plotly
 
-### **5. Paginação e Filtros**
-- Gerenciamento eficiente de grandes volumes de dados com paginação e filtros otimizados.
+## <a id="integrações-avançadas">Integrações Avançadas 🚀</a>
 
----
+### 📱 Integração WhatsApp (UltraMsg)
+- Alertas automáticos de pagamento vencido
+- Notificações personalizadas
 
-## **Tecnologias e Bibliotecas Utilizadas**
+### 💳 Integração de Pagamentos
+- Geração de QR Code dinâmico
+- Envio automático para WhatsApp
+- Rastreamento em tempo real do status de pagamento
 
-### **Backend**
-- **Django** e **Django Rest Framework**: Estruturação da aplicação e lógica de negócios.
+## <a id="relatórios-e-dados">📊 Relatórios e Visualização de Dados</a>
 
-### **Automação e Fila de Tarefas**
-- **Celery**: Processamento assíncrono de tarefas.
-- **Redis**: Armazenamento em cache e fila de mensagens.
+### 📄 Relatórios em PDF
+- Geração com xhtml2pdf e reportlab
+- Design personalizado
+- Exportação instantânea
 
-### **Análise e Visualização**
-- **Pandas**: Manipulação e análise de dados.
-- **Plotly**: Geração de gráficos interativos.
+### 📈 Análise de Dados
+- Gráficos financeiros interativos
+- Visualização de lucro mensal com Pandas e Plotly
 
-### **Relatórios**
-- **xhtml2pdf**, **reportlab** e **pydyf**: Criação de relatórios em PDF.
+## <a id="benefícios">Benefícios para a Academia</a>
 
-### **Segurança**
-- **cryptography** e **pyhanko**: Criptografia e assinaturas digitais.
-
-### **Testes e Cobertura**
-- **pytest** e **pytest-django**: Automação de testes.
-- **coverage**: Análise de cobertura de código.
-
----
-
-## **Benefícios para a Academia**
-
-### **Gestão Simplificada**
-- Centraliza informações sobre alunos e pagamentos.
-- Automatiza tarefas repetitivas, reduzindo erros manuais.
-
-### **Tomada de Decisão Baseada em Dados**
-- Relatórios detalhados e gráficos ajudam no planejamento financeiro e operacional.
-
-### **Eficiência Administrativa**
-- Geração de relatórios diários e mensais sem necessidade de intervenção manual.
-
-### **Flexibilidade e Escalabilidade**
-- Paginação e automação permitem atender academias de diferentes portes.
-
----
+- 🔹 Gestão centralizada de alunos e pagamentos
+- 🔹 Automação de tarefas repetitivas
+- 🔹 Tomada de decisão baseada em dados
+- 🔹 Relatórios automáticos
+- 🔹 Escalabilidade para academias de diversos portes
 
 ## **Exemplo de Fluxo**
-1. Um aluno realiza um pagamento.
-2. A aplicação atualiza automaticamente o status do aluno.
-3. Diariamente, a aplicação verifica pagamentos atrasados e envia notificações.
-4. No final do dia:
-   - Gráficos financeiros são gerados.
-   - Relatórios em PDF ficam disponíveis para download pelo administrador.
 
+1. Aluno realiza pagamento
+2. Sistema atualiza status automaticamente
+3. Verificação diária de pagamentos
+4. Geração de gráficos e relatórios
 
-## Passos para Rodar o Projeto
+## <a id="instalação">Instalação</a>
 
-### 1. Clonar o Repositório
+### Pré-requisitos
+- Python 3.8+
+- Redis
+- Docker (opcional)
+
+### Passos de Instalação
 
 Clone o repositório do projeto para seu diretório local:
 
