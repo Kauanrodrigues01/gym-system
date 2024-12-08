@@ -9,11 +9,11 @@
 - [Instalação](#instalação)
 
 ## <a id="sobre">Sobre o Projeto</a>
-
+![Imagem do Sistema](https://i.imgur.com/HjT46fz.png)
 Sistema de gestão de academia com automação inteligente, focado em eficiência administrativa e experiência do aluno.
 
 ## <a id="funcionalidades-principais">Funcionalidades Principais</a>
-
+![Funcionalidade Principal](https://i.imgur.com/XUpvZzx.png)
 - CRUD completo de alunos
 - Automatização de tarefas com Celery
 - Paginação e filtros otimizados
@@ -28,7 +28,6 @@ Sistema de gestão de academia com automação inteligente, focado em eficiênci
 - Plotly
 
 ## <a id="integrações-avançadas">Integrações Avançadas 🚀</a>
-
 ### 📱 Integração WhatsApp (UltraMsg)
 - Alertas automáticos de pagamento vencido
 - Notificações personalizadas
@@ -39,6 +38,7 @@ Sistema de gestão de academia com automação inteligente, focado em eficiênci
 - Rastreamento em tempo real do status de pagamento
 
 ## <a id="relatórios-e-dados">📊 Relatórios e Visualização de Dados</a>
+![Integração Avançada](https://i.imgur.com/kceu3KD.png)
 
 ### 📄 Relatórios em PDF
 - Geração com xhtml2pdf e reportlab
