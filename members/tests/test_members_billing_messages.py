@@ -7,16 +7,17 @@ from ..tasks import send_billing_messages, update_members_activity_status
 
 class BillingMessageTests(TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpTestData(cls):
         # Create sample members and payments
-        self.member_1 = Member.objects.create(
+        cls.member_1 = Member.objects.create(
             email="member1@example.com",
             full_name="Member 1",
             phone="123456789",
             is_active=False
         )
 
-        self.member_2 = Member.objects.create(
+        cls.member_2 = Member.objects.create(
             email="member2@example.com",
             full_name="Member 2",
             phone="987654321",
@@ -25,14 +26,14 @@ class BillingMessageTests(TestCase):
 
         # Create a past payment to ensure the member becomes inactive
         Payment.objects.create(
-            member=self.member_1,
+            member=cls.member_1,
             payment_date=localdate() - timedelta(days=31),  # Payment older than 30 days
             amount=100.00
         )
 
         # Create a past payment to ensure the member becomes inactive
         Payment.objects.create(
-            member=self.member_2,
+            member=cls.member_2,
             payment_date=localdate() - timedelta(days=31),  # Payment older than 30 days
             amount=100.00
         )

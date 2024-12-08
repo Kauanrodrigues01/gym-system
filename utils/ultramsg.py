@@ -11,6 +11,7 @@ class UltraMsgAPI:
         self.token = config('ULTRAMSG_TOKEN', default=None, cast=str)
         self.instance = config('ULTRAMSG_INSTANCE', default=None, cast=str)
         if not self.token or not self.instance:
+            # O coverage está dizendo que não testei essa possibilidade
             raise ValueError('ULTRAMSG_TOKEN or ULTRAMSG_INSTANCE not configured in .env')
 
         self.base_url = f'https://api.ultramsg.com/{self.instance}/messages'
@@ -33,6 +34,7 @@ class UltraMsgAPI:
             response.raise_for_status()
             return response
         except requests.exceptions.RequestException as e:
+            # O coverage está dizendo que não testei essa possibilidade
             return {'error': str(e)}
         
     def send_image(self, to, image_url, caption=""):
@@ -53,17 +55,17 @@ class UltraMsgAPI:
             response.raise_for_status()
             return response
         except requests.exceptions.RequestException as e:
+            # O coverage está dizendo que não testei essa possibilidade
             return {'error': str(e)}
 
 
 # Example usage:
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     try:
-        # Make sure your .env file contains the correct ULTRAMSG_TOKEN and ULTRAMSG_INSTANCE
         ultramsg = UltraMsgAPI()
 
-        # Test the send_message method
         response = ultramsg.send_image(to='The-number', image_url='https://blog.emania.com.br/wp-content/uploads/2016/02/direitos-autorais-e-de-imagem.jpg', caption='Imagem aleatória')
-        print(response)  # Print the response
+        
+        print(response) 
     except ValueError as e:
         print(f'Invalid configuration: {e}')
