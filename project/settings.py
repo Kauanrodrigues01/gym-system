@@ -206,7 +206,7 @@ if DEBUG:  # Ativar somente em DEBUG
     ]
 
     DEBUG_TOOLBAR_CONFIG = {
-        'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG and not TESTING,  # Ativa somente quando DEBUG=True e não em testes
+        'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG and not TESTING,
         'INTERCEPT_REDIRECTS': False,
         'DISABLE_PANELS': {'debug_toolbar.panels.redirects.RedirectsPanel'},
         'RESULTS_CACHE_SIZE': 50,

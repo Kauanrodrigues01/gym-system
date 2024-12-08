@@ -33,10 +33,19 @@ class Member(models.Model):
 
         if self.last_payment_date and self.last_payment_date < now - timedelta(days=30):
             self.is_active = False
-            BillingMessage.objects.get_or_create(
+
+            thirty_days_ago = now - timedelta(days=30)
+            recent_sent_messages = BillingMessage.objects.filter(
                 member=self,
-                is_sent=False,
+                is_sent=True,
+                sent_at__gte=thirty_days_ago,
             )
+        
+            if not recent_sent_messages.exists():
+                BillingMessage.objects.get_or_create(
+                    member=self,
+                    is_sent=False,
+                )
         else:
             self.is_active = True
             
@@ -111,11 +120,18 @@ class Payment(models.Model):
 
 class BillingMessage(models.Model):
     member = models.ForeignKey('Member', on_delete=models.CASCADE, related_name='billing_messages')
-    created_at = models.DateField(default=localdate)  # Data local em que a mensagem foi salva
     is_sent = models.BooleanField(default=False)  # Flag para saber se já foi enviada
+    created_at = models.DateField(default=localdate)  # Data local em que a mensagem foi salva
+    sent_at = models.DateField(null=True, blank=True)  # Data e hora em que a mensagem foi enviada
 
     def __str__(self):
         return f"BillingMessage for {self.member.full_name} - Sent: {self.is_sent}"
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['is_sent']),
+            models.Index(fields=['sent_at']),
+        ]
     
     def send_message(self):
         ultramsg = UltraMsgAPI()
@@ -125,6 +141,7 @@ class BillingMessage(models.Model):
         
         if response.status_code == 200 and 'true' in response.text:
             self.is_sent = True
+            self.sent_at = localdate()
             self.save()
         else:
             print(f"Error sending message to {self.member.full_name}: {response.text}")
