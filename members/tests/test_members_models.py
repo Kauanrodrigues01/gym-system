@@ -2,8 +2,9 @@ from datetime import timedelta, date, datetime
 from django.test import TestCase
 from django.utils.timezone import localdate
 from parameterized import parameterized
-from members.models import Member, Payment
+from members.models import Member, Payment, BillingMessage
 from django.core.exceptions import ValidationError
+from unittest.mock import patch, MagicMock
 
 class TestBase(TestCase):
     @classmethod
@@ -129,3 +130,80 @@ class PaymentModelTestCase(TestBase):
         
         total_profit = Payment.get_current_year_profit()
         self.assertEqual(total_profit, 300.00)
+
+class BillingMessageModelTest(TestCase):
+
+    def setUp(self):
+        """
+        Setup for tests: creates a member and a billing message.
+        """
+        # Creates a member for testing
+        self.member = Member.objects.create(full_name='John Doe', is_active=False, email='john.doe@example.com')
+
+        # Creates a billing message for this member
+        self.billing_message = BillingMessage.objects.create(member=self.member, is_sent=False)
+
+    def test_billing_message_creation(self):
+        """
+        Tests if the BillingMessage object is created correctly.
+        """
+        # Verifies if the billing message was created
+        self.assertEqual(self.billing_message.member, self.member)
+        self.assertFalse(self.billing_message.is_sent)
+        self.assertIsNone(self.billing_message.sent_at)
+
+    @patch('utils.ultramsg.UltraMsgAPI.send_message')  # Path to the UltraMsgAPI method
+    def test_send_message_success(self, mock_send_message):
+        """
+        Tests if the send_message method correctly updates is_sent and sent_at when successful.
+        """
+        # Mocking the response from the UltraMsg API
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.text = 'true'
+
+        # Makes the mock return the simulated response
+        mock_send_message.return_value = mock_response
+
+        # Calls the send_message method
+        self.billing_message.send_message()
+
+        # Verifies if the message was sent successfully
+        self.assertTrue(self.billing_message.is_sent)
+        self.assertEqual(self.billing_message.sent_at, date.today())  # Verifies if the sent_at date is today's date
+
+    @patch('utils.ultramsg.UltraMsgAPI.send_message')  # Path to the UltraMsgAPI method
+    def test_send_message_failure(self, mock_send_message):
+        """
+        Tests if the send_message method handles failures correctly and doesn't update is_sent.
+        """
+        # Mocking a failed response from the UltraMsg API
+        mock_response = MagicMock()
+        mock_response.status_code = 500
+        mock_response.text = 'error'
+
+        # Makes the mock return the simulated response
+        mock_send_message.return_value = mock_response
+
+        # Calls the send_message method
+        self.billing_message.send_message()
+
+        # Verifies if the message wasn't marked as sent
+        self.assertFalse(self.billing_message.is_sent)
+        self.assertIsNone(self.billing_message.sent_at)
+
+    def test_str_method(self):
+        """
+        Tests the string representation of the BillingMessage model.
+        """
+        # Verifies if the string representation of the BillingMessage is correct
+        expected_str = f"BillingMessage for {self.member.full_name} - Sent: {self.billing_message.is_sent}"
+        self.assertEqual(str(self.billing_message), expected_str)
+
+    def test_indexes(self):
+        """
+        Tests if the indexes on 'is_sent' and 'sent_at' fields are created properly.
+        """
+        # Verifies that the model's indexes are created as expected
+        self.assertTrue(BillingMessage._meta.indexes[0].fields, ['is_sent'])
+        self.assertTrue(BillingMessage._meta.indexes[1].fields, ['sent_at'])
