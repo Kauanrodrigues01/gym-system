@@ -65,21 +65,6 @@
                     <i class="fas fa-download"></i> Relatório do dia atual
                 </a>
             </div>
-
-            <h2 class="download-report-title">Download de Relatórios com data especificada</h2>
-            <div class="download-report-form-container">
-                <form action="{% url 'admin_panel:members' %}" method="GET" class="download-report-form">
-                    <div class="download-report-group">
-                        <label for="date-filter" class="download-report-label">Data do Relatório:</label>
-                        <input type="date" name="date" id="date-filter" class="download-report-input" value="{{ request.GET.date }}">
-                    </div>
-                    <div class="download-report-actions">
-                        <button class="download-report-button download-report-submit" type="submit">
-                            <i class="fas fa-download"></i> Gerar Relatório
-                        </button>
-                    </div>
-                </form>
-            </div> 
         </div>        
             
     </div>
