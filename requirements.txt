@@ -20,7 +20,6 @@ Django==5.1.3
 django-celery-beat==2.7.0
 django-extensions==3.2.3
 django-timezone-field==7.0
-gunicorn==23.0.0
 html5lib==1.1
 idna==3.10
 kombu==5.4.2
