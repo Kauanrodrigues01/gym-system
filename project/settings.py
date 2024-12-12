@@ -212,3 +212,4 @@ if DEBUG:  # Ativar somente em DEBUG
         'RESULTS_CACHE_SIZE': 50,
         'ENABLE_STACKTRACES': True,
     }
+    
